@@ -48,7 +48,7 @@ jobs:
       with:
         python-version: "3.10"
     - name: menjalankan aplikasi
-      run: python main.py
+      run: python print_nama.py
     - name: Ave Output
       run: echo "${{ steps.run_python_app.outputs.stdout }}" > output.txt
 
