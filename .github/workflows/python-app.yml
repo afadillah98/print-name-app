@@ -52,11 +52,14 @@ jobs:
     - name: menjalankan aplikasi
       run: |
         python main.py > output.txt
-        echo "::set-output name=stdout::$(cat output.txt)"
-      
-    - name: Menyimpan Output
-      run: echo "${{ steps.run_python_app.outputs.stdout }}" > output.txt
+        echo "::save-state name=stdout::$(cat output.txt)"
 
+    - name: menyimpan Output
+      run: |
+        OUTPUT=$(echo "${{ steps.run_python_app.outputs.stdout }}")
+        echo "::set-output name=stdout::$OUTPUT"
+        echo "$OUTPUT" > output.txt
+    
     - uses: actions/upload-artifact@v4
       with:
         name: artifact-jakarta
