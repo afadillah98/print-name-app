@@ -39,6 +39,7 @@ jobs:
 #        pytest
 
   runapp:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -53,7 +54,7 @@ jobs:
         python main.py > output.txt
         echo "::set-output name=stdout::$(cat output.txt)"
       
-    - name: menyimpan Output
+    - name: Menyimpan Output
       run: echo "${{ steps.run_python_app.outputs.stdout }}" > output.txt
 
     - uses: actions/upload-artifact@v4
